@@ -26,7 +26,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>400,866</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>775,1145</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>AssignTask_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="25">
@@ -82,23 +82,23 @@
       <AssemblyReference>Microsoft.Activities</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="AssignTask" sap:VirtualizedContainerService.HintSize="380,806" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="AssignTask" sap:VirtualizedContainerService.HintSize="755,1085" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="jsonStr" />
       <Variable x:TypeArguments="u:Body" Default="[New Body()]" Name="body" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[new Dictionary(of String, String)]" Name="headers" />
-      <Variable x:TypeArguments="x:String" Name="result" />
       <Variable x:TypeArguments="x:String" Name="access_token" />
       <Variable x:TypeArguments="x:String" Name="id_token" />
       <Variable x:TypeArguments="u:UserDto" Name="userDto" />
       <Variable x:TypeArguments="x:Int32" Name="userId" />
+      <Variable x:TypeArguments="u:ODataResponseOfListOfTaskAssignmentErrorResponse" Name="responseModel" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Token workflow" sap:VirtualizedContainerService.HintSize="338,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Token.xaml">
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Token workflow" sap:VirtualizedContainerService.HintSize="713,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Token.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="client_id">[client_id]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="user_key">[user_key]</InArgument>
@@ -109,7 +109,7 @@
         <InOutArgument x:TypeArguments="x:String" x:Key="serviceInstanceName">[serviceInstanceName]</InOutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="ワークフロー ファイルを呼び出し" sap:VirtualizedContainerService.HintSize="338,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="User.xaml">
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="ワークフロー ファイルを呼び出し" sap:VirtualizedContainerService.HintSize="713,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="User.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="access_token">[access_token]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="accountLogicalName">[accountLogicalName]</InArgument>
@@ -119,7 +119,7 @@
         <OutArgument x:TypeArguments="u:UserDto" x:Key="userDto">[userDto]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="338,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="713,60" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Int32">[userId]</OutArgument>
       </Assign.To>
@@ -127,7 +127,7 @@
         <InArgument x:TypeArguments="x:Int32">[cint(userDto.Id)]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="338,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="713,60" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[jsonStr]</OutArgument>
       </Assign.To>
@@ -135,7 +135,7 @@
         <InArgument x:TypeArguments="x:String">[String.Format("{{ ""taskAssignments"": [ {{ ""TaskId"": {0}, ""UserId"": {1} }} ] }}", taskId, userId)]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="338,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="713,60" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="u:Body">[body]</OutArgument>
       </Assign.To>
@@ -143,7 +143,7 @@
         <InArgument x:TypeArguments="u:Body">[Body.FromJson(jsonStr)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:MultipleAssign DisplayName="header 生成" sap:VirtualizedContainerService.HintSize="338,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="header 生成" sap:VirtualizedContainerService.HintSize="713,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
@@ -157,10 +157,18 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <uwt:AssignTasksActivity ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" Response="{x:Null}" Username="{x:Null}" BearerToken="[access_token]" DisplayName="AssignTasks" Endpoint="[String.Format(&quot;https://platform.uipath.com/{0}/{1}&quot;,accountLogicalName,serviceInstanceName)]" Headers="[headers]" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="AssignTasksActivity_1" TimeoutMS="30000">
+    <uwt:AssignTasksActivity ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" Username="{x:Null}" BearerToken="[access_token]" DisplayName="AssignTasks" Endpoint="[String.Format(&quot;https://platform.uipath.com/{0}/{1}&quot;,accountLogicalName,serviceInstanceName)]" Headers="[headers]" sap:VirtualizedContainerService.HintSize="713,22" sap2010:WorkflowViewState.IdRef="AssignTasksActivity_1" Response="[responseModel]" TimeoutMS="30000">
       <uwt:AssignTasksActivity.Request>
         <uwt:TasksClientAssignTasksRequest X_UIPATH_OrganizationUnitId="{x:Null}" Body="[body]" />
       </uwt:AssignTasksActivity.Request>
     </uwt:AssignTasksActivity>
+    <If Condition="[responseModel.Value.Count &gt;0]" DisplayName="条件分岐" sap:VirtualizedContainerService.HintSize="713,239" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <ui:LogMessage DisplayName="メッセージをログ" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[String.Format(&quot;https://platform.uipath.com/{0}/{1}/odata/Tasks/UiPath.Server.Configuration.OData.AssignTasks:{2}&quot;,accountLogicalName,serviceInstanceName,responseModel.ToJson)]" />
+      </If.Then>
+      <If.Else>
+        <ui:LogMessage DisplayName="メッセージをログ" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Trace" Message="[String.Format(&quot;https://platform.uipath.com/{0}/{1}/odata/Tasks/UiPath.Server.Configuration.OData.AssignTasks:{2}&quot;,accountLogicalName,serviceInstanceName,responseModel.ToJson)]" />
+      </If.Else>
+    </If>
   </Sequence>
 </Activity>
