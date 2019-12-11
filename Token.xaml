@@ -4,9 +4,9 @@
     <x:Property Name="user_key" Type="InArgument(x:String)" />
     <x:Property Name="id_token" Type="OutArgument(x:String)" />
     <x:Property Name="access_token" Type="OutArgument(x:String)" />
-    <x:Property Name="accountLogicalName" Type="OutArgument(x:String)" />
-    <x:Property Name="serviceInstanceLogicalName" Type="OutArgument(x:String)" />
-    <x:Property Name="serviceInstanceName" Type="OutArgument(x:String)" />
+    <x:Property Name="accountLogicalName" Type="InOutArgument(x:String)" />
+    <x:Property Name="serviceInstanceLogicalName" Type="InOutArgument(x:String)" />
+    <x:Property Name="serviceInstanceName" Type="InOutArgument(x:String)" />
   </x:Members>
   <this:Main.client_id>
     <InArgument x:TypeArguments="x:String" />
@@ -17,7 +17,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>442,2024</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>613,1108</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="24">
@@ -71,7 +71,7 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Token取得" sap:VirtualizedContainerService.HintSize="422,1964" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Token取得" sap:VirtualizedContainerService.HintSize="593,1008" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="jsonStr" />
     </Sequence.Variables>
@@ -80,41 +80,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="JSON作成" sap:VirtualizedContainerService.HintSize="380,281" sap2010:WorkflowViewState.IdRef="Sequence_2">
-      <Sequence.Variables>
-        <Variable x:TypeArguments="scg:IDictionary(x:String, x:String)" Name="jsonDic" />
-      </Sequence.Variables>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <p:BuildDictionary x:TypeArguments="x:String, x:String" DisplayName="Build dictionary" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="BuildDictionary`2_1" Result="[jsonDic]">
-        <p:BuildDictionary.Values>
-          <InArgument x:TypeArguments="x:String" x:Key="grant_type">refresh_token</InArgument>
-          <InArgument x:TypeArguments="x:String" x:Key="client_id">[client_id]</InArgument>
-          <InArgument x:TypeArguments="x:String" x:Key="refresh_token">[user_key]</InArgument>
-        </p:BuildDictionary.Values>
-      </p:BuildDictionary>
-      <us:ToJSONString DisplayName="JSONへ変換" sap:VirtualizedContainerService.HintSize="200,36" sap2010:WorkflowViewState.IdRef="ToJSONString_1" Input="[jsonDic]" Result="[jsonStr]">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </us:ToJSONString>
-      <ui:LogMessage DisplayName="メッセージをログ" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[jsonStr]">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </ui:LogMessage>
-    </Sequence>
-    <Sequence DisplayName="Token" sap:VirtualizedContainerService.HintSize="380,474" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence DisplayName="Token" sap:VirtualizedContainerService.HintSize="551,66" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:String" Name="result" />
         <Variable x:TypeArguments="njl:JObject" Name="resultObj" />
@@ -122,9 +88,44 @@
       </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
+      <Sequence DisplayName="Token取得のJSONパラメタ作成" sap:VirtualizedContainerService.HintSize="338,66" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="scg:IDictionary(x:String, x:String)" Name="jsonDic" />
+        </Sequence.Variables>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <p:BuildDictionary x:TypeArguments="x:String, x:String" DisplayName="Build dictionary" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="BuildDictionary`2_1" Result="[jsonDic]">
+          <p:BuildDictionary.Values>
+            <InArgument x:TypeArguments="x:String" x:Key="grant_type">refresh_token</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="client_id">[client_id]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="refresh_token">[user_key]</InArgument>
+          </p:BuildDictionary.Values>
+        </p:BuildDictionary>
+        <us:ToJSONString DisplayName="JSONへ変換" sap:VirtualizedContainerService.HintSize="200,36" sap2010:WorkflowViewState.IdRef="ToJSONString_1" Input="[jsonDic]" Result="[jsonStr]">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </us:ToJSONString>
+        <ui:LogMessage DisplayName="メッセージをログ" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[jsonStr]">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:LogMessage>
+      </Sequence>
       <ui:HttpClient ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" Body="[jsonStr]" BodyFormat="application/json" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP 要求" EndPoint="https://account.uipath.com/oauth/token" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="HttpClient_2" Method="POST" Result="[result]" StatusCode="[StatusCode]" TimeoutMS="6000">
         <ui:HttpClient.Attachments>
           <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
@@ -174,110 +175,132 @@
         </ui:MultipleAssign.AssignOperations>
       </ui:MultipleAssign>
     </Sequence>
-    <Sequence DisplayName="getAccountsForUser" sap:VirtualizedContainerService.HintSize="380,483" sap2010:WorkflowViewState.IdRef="Sequence_4">
-      <Sequence.Variables>
-        <Variable x:TypeArguments="x:String" Name="accountsForUser" />
-        <Variable x:TypeArguments="njl:JObject" Name="resultObj" />
-        <Variable x:TypeArguments="x:Int32" Name="statusCode" />
-      </Sequence.Variables>
+    <If sap2010:Annotation.AnnotationText="Account Logical Nameが引数で渡ってきたら、取得処理はSkipする" Condition="[accountLogicalName Is Nothing]" DisplayName="Account Logical Name 取得" sap:VirtualizedContainerService.HintSize="551,108" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" BodyFormat="application/json" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP 要求" EndPoint="https://platform.uipath.com/cloudrpa/api/getAccountsForUser" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="HttpClient_3" Method="GET" Result="[accountsForUser]" StatusCode="[statusCode]" TimeoutMS="6000">
-        <ui:HttpClient.Attachments>
-          <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-        </ui:HttpClient.Attachments>
-        <ui:HttpClient.Cookies>
-          <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-        </ui:HttpClient.Cookies>
-        <ui:HttpClient.Headers>
-          <InArgument x:TypeArguments="x:String" x:Key="Authorization">["Bearer " + id_token]</InArgument>
-        </ui:HttpClient.Headers>
-        <ui:HttpClient.Parameters>
-          <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-        </ui:HttpClient.Parameters>
-        <ui:HttpClient.UrlSegments>
-          <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-        </ui:HttpClient.UrlSegments>
-      </ui:HttpClient>
-      <ui:LogMessage DisplayName="メッセージをログ" sap:VirtualizedContainerService.HintSize="338,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Trace" Message="[String.Format(&quot;https://platform.uipath.com/cloudrpa/api/getAccountsForUser: {0}&quot;,StatusCode)]">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </ui:LogMessage>
-      <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="JSON をデシリアライズ" sap:VirtualizedContainerService.HintSize="338,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_2" JsonObject="[resultObj]" JsonString="[accountsForUser]" />
-      <ui:MultipleAssign DisplayName="複数代入" sap:VirtualizedContainerService.HintSize="338,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
-        <ui:MultipleAssign.AssignOperations>
-          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
-              <ui:AssignOperation.To>
-                <OutArgument x:TypeArguments="x:String">[accountLogicalName]</OutArgument>
-              </ui:AssignOperation.To>
-              <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[resultObj("accounts")(0)("accountLogicalName").ToString]</InArgument>
-              </ui:AssignOperation.Value>
-            </ui:AssignOperation>
-          </scg:List>
-        </ui:MultipleAssign.AssignOperations>
-      </ui:MultipleAssign>
-    </Sequence>
-    <Sequence DisplayName="getAllServiceInstances" sap:VirtualizedContainerService.HintSize="380,514" sap2010:WorkflowViewState.IdRef="Sequence_5">
-      <Sequence.Variables>
-        <Variable x:TypeArguments="x:String" Name="allServiceInstances" />
-        <Variable x:TypeArguments="njl:JArray" Name="resultObj" />
-        <Variable x:TypeArguments="x:Int32" Name="statusCode" />
-      </Sequence.Variables>
+      <If.Then>
+        <Sequence DisplayName="getAccountsForUser" sap:VirtualizedContainerService.HintSize="380,483" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="accountsForUser" />
+            <Variable x:TypeArguments="njl:JObject" Name="resultObj" />
+            <Variable x:TypeArguments="x:Int32" Name="statusCode" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" BodyFormat="application/json" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP 要求" EndPoint="https://platform.uipath.com/cloudrpa/api/getAccountsForUser" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="HttpClient_3" Method="GET" Result="[accountsForUser]" StatusCode="[statusCode]" TimeoutMS="6000">
+            <ui:HttpClient.Attachments>
+              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+            </ui:HttpClient.Attachments>
+            <ui:HttpClient.Cookies>
+              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+            </ui:HttpClient.Cookies>
+            <ui:HttpClient.Headers>
+              <InArgument x:TypeArguments="x:String" x:Key="Authorization">["Bearer " + id_token]</InArgument>
+            </ui:HttpClient.Headers>
+            <ui:HttpClient.Parameters>
+              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+            </ui:HttpClient.Parameters>
+            <ui:HttpClient.UrlSegments>
+              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+            </ui:HttpClient.UrlSegments>
+          </ui:HttpClient>
+          <ui:LogMessage DisplayName="メッセージをログ" sap:VirtualizedContainerService.HintSize="338,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Trace" Message="[String.Format(&quot;https://platform.uipath.com/cloudrpa/api/getAccountsForUser: {0}&quot;,StatusCode)]">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:LogMessage>
+          <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="JSON をデシリアライズ" sap:VirtualizedContainerService.HintSize="338,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_2" JsonObject="[resultObj]" JsonString="[accountsForUser]" />
+          <ui:MultipleAssign DisplayName="複数代入" sap:VirtualizedContainerService.HintSize="338,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+            <ui:MultipleAssign.AssignOperations>
+              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[accountLogicalName]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">[resultObj("accounts")(0)("accountLogicalName").ToString]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+              </scg:List>
+            </ui:MultipleAssign.AssignOperations>
+          </ui:MultipleAssign>
+        </Sequence>
+      </If.Then>
+    </If>
+    <If sap2010:Annotation.AnnotationText="Tenant(Service) Logical Name/ Service Name ともに渡ってきたら取得処理はSkipする" Condition="[serviceInstanceName IsNot Nothing AndAlso serviceInstanceLogicalName IsNot Nothing]" DisplayName="Tenant(Service) Logical Name/ Service Name 取得" sap:VirtualizedContainerService.HintSize="551,662" sap2010:WorkflowViewState.IdRef="If_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" BodyFormat="application/json" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP 要求" EndPoint="[String.Format(&quot;https://platform.uipath.com/cloudrpa/api/account/{0}/getAllServiceInstances&quot;,accountLogicalName)]" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="HttpClient_4" Method="GET" Result="[allServiceInstances]" StatusCode="[statusCode]" TimeoutMS="6000">
-        <ui:HttpClient.Attachments>
-          <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-        </ui:HttpClient.Attachments>
-        <ui:HttpClient.Cookies>
-          <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-        </ui:HttpClient.Cookies>
-        <ui:HttpClient.Headers>
-          <InArgument x:TypeArguments="x:String" x:Key="Authorization">["Bearer " + id_token]</InArgument>
-        </ui:HttpClient.Headers>
-        <ui:HttpClient.Parameters>
-          <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-        </ui:HttpClient.Parameters>
-        <ui:HttpClient.UrlSegments>
-          <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-        </ui:HttpClient.UrlSegments>
-      </ui:HttpClient>
-      <ui:LogMessage DisplayName="メッセージをログ" sap:VirtualizedContainerService.HintSize="338,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Trace" Message="[String.Format(&quot;https://platform.uipath.com/cloudrpa/api/account/{0}/getAllServiceInstances: {1}&quot;,accountLogicalName,StatusCode)]" />
-      <ui:DeserializeJsonArray DisplayName="JSON 配列をデシリアライズ" sap:VirtualizedContainerService.HintSize="338,60" sap2010:WorkflowViewState.IdRef="DeserializeJsonArray_1" JsonArray="[resultObj]" JsonString="[allServiceInstances]" />
-      <ui:MultipleAssign DisplayName="複数代入" sap:VirtualizedContainerService.HintSize="338,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
-        <ui:MultipleAssign.AssignOperations>
-          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
-              <ui:AssignOperation.To>
-                <OutArgument x:TypeArguments="x:String">[serviceInstanceLogicalName]</OutArgument>
-              </ui:AssignOperation.To>
-              <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[resultObj(0)("serviceInstanceLogicalName").ToString]</InArgument>
-              </ui:AssignOperation.Value>
-            </ui:AssignOperation>
-            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
-              <ui:AssignOperation.To>
-                <OutArgument x:TypeArguments="x:String">[serviceInstanceName]</OutArgument>
-              </ui:AssignOperation.To>
-              <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[resultObj(0)("serviceInstanceName").ToString]</InArgument>
-              </ui:AssignOperation.Value>
-            </ui:AssignOperation>
-          </scg:List>
-        </ui:MultipleAssign.AssignOperations>
-      </ui:MultipleAssign>
-    </Sequence>
+      <If.Else>
+        <Sequence DisplayName="getAllServiceInstances" sap:VirtualizedContainerService.HintSize="380,514" sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="allServiceInstances" />
+            <Variable x:TypeArguments="njl:JArray" Name="resultObj" />
+            <Variable x:TypeArguments="x:Int32" Name="statusCode" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" BodyFormat="application/json" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP 要求" EndPoint="[String.Format(&quot;https://platform.uipath.com/cloudrpa/api/account/{0}/getAllServiceInstances&quot;,accountLogicalName)]" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="HttpClient_4" Method="GET" Result="[allServiceInstances]" StatusCode="[statusCode]" TimeoutMS="6000">
+            <ui:HttpClient.Attachments>
+              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+            </ui:HttpClient.Attachments>
+            <ui:HttpClient.Cookies>
+              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+            </ui:HttpClient.Cookies>
+            <ui:HttpClient.Headers>
+              <InArgument x:TypeArguments="x:String" x:Key="Authorization">["Bearer " + id_token]</InArgument>
+            </ui:HttpClient.Headers>
+            <ui:HttpClient.Parameters>
+              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+            </ui:HttpClient.Parameters>
+            <ui:HttpClient.UrlSegments>
+              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+            </ui:HttpClient.UrlSegments>
+          </ui:HttpClient>
+          <ui:LogMessage DisplayName="メッセージをログ" sap:VirtualizedContainerService.HintSize="338,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Trace" Message="[String.Format(&quot;https://platform.uipath.com/cloudrpa/api/account/{0}/getAllServiceInstances: {1}&quot;,accountLogicalName,StatusCode)]" />
+          <ui:DeserializeJsonArray DisplayName="JSON 配列をデシリアライズ" sap:VirtualizedContainerService.HintSize="338,60" sap2010:WorkflowViewState.IdRef="DeserializeJsonArray_1" JsonArray="[resultObj]" JsonString="[allServiceInstances]" />
+          <ui:MultipleAssign DisplayName="複数代入" sap:VirtualizedContainerService.HintSize="338,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+            <ui:MultipleAssign.AssignOperations>
+              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[serviceInstanceLogicalName]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">[resultObj(0)("serviceInstanceLogicalName").ToString]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[serviceInstanceName]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">[resultObj(0)("serviceInstanceName").ToString]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+              </scg:List>
+            </ui:MultipleAssign.AssignOperations>
+          </ui:MultipleAssign>
+        </Sequence>
+      </If.Else>
+    </If>
   </Sequence>
 </Activity>

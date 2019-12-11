@@ -104,10 +104,13 @@
     </ui:MultipleAssign>
     <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AssignTask workflow" sap:VirtualizedContainerService.HintSize="338,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="AssignTask.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="client_id">[client_id]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="user_key">[user_key]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="fullName">[fullName]</InArgument>
         <InArgument x:TypeArguments="x:Int32" x:Key="taskId">[taskId]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="client_id">[client_id]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="user_key">[user_key]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="serviceInstanceLogicalName" />
+        <InArgument x:TypeArguments="x:String" x:Key="serviceInstanceName" />
+        <InArgument x:TypeArguments="x:String" x:Key="accountLogicalName" />
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
   </Sequence>
