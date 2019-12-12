@@ -1,0 +1,49 @@
+{
+  "name": "kino.UiPath.OrchestratorAPI",
+  "description": "Orchestrator API Wrapper ",
+  "main": "NewActivity.xaml",
+  "dependencies": {
+    "kino.UiPath.Utils.Activities": "0.1.86",
+    "Microsoft.Activities": "1.0.1",
+    "UiPath.Excel.Activities": "2.7.2",
+    "UiPath.Mail.Activities": "1.7.2",
+    "UiPath.System.Activities": "19.10.1",
+    "UiPath.UIAutomation.Activities": "19.11.0",
+    "UiPath.WebAPI.Activities": "1.4.4"
+  },
+  "webServices": [
+    {
+      "namespace": "UiPathWebApi",
+      "serviceDocument": "Services\\UiPathWebApi.json",
+      "webDocumentUri": "https://platform.uipath.com/kinooqmollho/kinoorgDefault/swagger/docs/V2",
+      "uniqueReference": "67DyUxQSqHaK7LSv6pAOcSbTeHydYD6zTxjrUC/WfWY="
+    }
+  ],
+  "schemaVersion": "4.0",
+  "studioVersion": "19.10.2.0",
+  "projectVersion": "1.0.13",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "isPausable": true,
+    "requiresUserInteraction": true,
+    "supportsPersistence": false,
+    "excludedLoggedData": [
+      "Private:*",
+      "*password*"
+    ],
+    "executionType": "Workflow"
+  },
+  "designOptions": {
+    "projectProfile": "Developement",
+    "outputType": "Library",
+    "libraryOptions": {
+      "includeOriginalXaml": false,
+      "privateWorkflows": [
+        "test_AssignTask.xaml",
+        "test_Token.xaml"
+      ]
+    },
+    "fileInfos": []
+  },
+  "expressionLanguage": "VisualBasic"
+}
