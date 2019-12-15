@@ -1,31 +1,15 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="GetUserID" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:u="clr-namespace:UiPathWebApi;assembly=UiPathWebApi" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uwu="clr-namespace:UiPath.WebClient.UsersClientNamespace;assembly=UiPathWebApi" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="GetUserID" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property sap2010:Annotation.AnnotationText="Tenant Logical Nameを入れてください(オプション項目)" Name="serviceInstanceLogicalName" Type="InArgument(x:String)" />
-    <x:Property sap2010:Annotation.AnnotationText="Access Tokenを入れてください(必須)" Name="access_token" Type="InArgument(x:String)" />
-    <x:Property sap2010:Annotation.AnnotationText="表示されているサービス名を入れてください(オプション項目)" Name="serviceInstanceName" Type="InArgument(x:String)" />
-    <x:Property sap2010:Annotation.AnnotationText="Account Logical Nameを入れてください(オプション項目)" Name="accountLogicalName" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="「名」(半角スペース)「姓」を入れてください(必須)" Name="fullName" Type="InArgument(x:String)" />
-    <x:Property Name="userDto" Type="OutArgument(u:UserDto)" />
+    <x:Property Name="userDto" Type="OutArgument(njl:JToken)" />
   </x:Members>
-  <this:GetUserID.serviceInstanceLogicalName>
-    <InArgument x:TypeArguments="x:String" />
-  </this:GetUserID.serviceInstanceLogicalName>
-  <this:GetUserID.access_token>
-    <InArgument x:TypeArguments="x:String" />
-  </this:GetUserID.access_token>
-  <this:GetUserID.serviceInstanceName>
-    <InArgument x:TypeArguments="x:String" />
-  </this:GetUserID.serviceInstanceName>
-  <this:GetUserID.accountLogicalName>
-    <InArgument x:TypeArguments="x:String" />
-  </this:GetUserID.accountLogicalName>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>588,1010</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>588,1124</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetUserID_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="25">
+    <scg:List x:TypeArguments="x:String" Capacity="26">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -50,11 +34,11 @@
       <x:String>Newtonsoft.Json.Linq</x:String>
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>Newtonsoft.Json</x:String>
-      <x:String>UiPathWebApi</x:String>
+      <x:String>System.Web</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="21">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="22">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -76,42 +60,46 @@
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>UiPathWebApi</AssemblyReference>
+      <AssemblyReference>System.Web</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="GetUserID" sap:VirtualizedContainerService.HintSize="568,910" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="GetUserID" sap:VirtualizedContainerService.HintSize="568,1064" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[new Dictionary(of String, String)]" Name="headers" />
-      <Variable x:TypeArguments="u:ODataResponseOfListOfUserDto" Name="responseModel" />
+      <Variable x:TypeArguments="njl:JArray" Name="responseModel" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="複数代入" sap:VirtualizedContainerService.HintSize="526,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
-      <ui:MultipleAssign.AssignOperations>
-        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
-            <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[headers("X-UiPath-TenantName")]</OutArgument>
-            </ui:AssignOperation.To>
-            <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[serviceInstanceLogicalName]</InArgument>
-            </ui:AssignOperation.Value>
-          </ui:AssignOperation>
-        </scg:List>
-      </ui:MultipleAssign.AssignOperations>
-    </ui:MultipleAssign>
-    <uwu:GetUsersActivity ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" Username="{x:Null}" sap2010:Annotation.AnnotationText="参考：https://docs.uipath.com/orchestrator/lang-ja/reference#building-api-requests" BearerToken="[access_token]" DisplayName="GetUsers" Endpoint="[String.Format(&quot;https://platform.uipath.com/{0}/{1}&quot;,accountLogicalName,serviceInstanceName)]" Headers="[headers]" sap:VirtualizedContainerService.HintSize="526,109" sap2010:WorkflowViewState.IdRef="GetUsersActivity_1" Response="[responseModel]" TimeoutMS="30000">
-      <uwu:GetUsersActivity.Request>
-        <uwu:UsersClientGetUsersRequest Count="{x:Null}" Expand="{x:Null}" Orderby="{x:Null}" Select="{x:Null}" Skip="{x:Null}" Top="{x:Null}" Filter="[String.Format(&quot;FullName eq '{0}'&quot;,fullName)]" />
-      </uwu:GetUsersActivity.Request>
+    <Sequence DisplayName="GetUsers" sap:VirtualizedContainerService.HintSize="526,401" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="njl:JObject" Name="tmp" />
+        <Variable x:TypeArguments="x:String" Name="responseModelStr" />
+      </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-    </uwu:GetUsersActivity>
+      <ui:OrchestratorHttpRequest FolderPath="{x:Null}" JSONPayload="{x:Null}" ResponseHeaders="{x:Null}" StatusCode="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="参考：https://docs.uipath.com/orchestrator/lang-ja/reference#building-api-requests" DisplayName="GetUsers" sap:VirtualizedContainerService.HintSize="334,109" sap2010:WorkflowViewState.IdRef="OrchestratorHttpRequest_2" Method="GET" RelativeEndpoint="[String.Format(&quot;/odata/Users?$filter={0}&quot;,&#xA;String.Format(&quot;FullName eq '{0}'&quot;,System.Web.HttpUtility.UrlEncode(fullName))&#xA;)]" Result="[responseModelStr]">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:OrchestratorHttpRequest>
+      <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="JSON をデシリアライズ" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[tmp]" JsonString="[responseModelStr]">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:DeserializeJson>
+      <ui:DeserializeJsonArray DisplayName="JSON 配列をデシリアライズ" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="DeserializeJsonArray_1" JsonArray="[responseModel]" JsonString="[tmp(&quot;value&quot;).ToString]" />
+    </Sequence>
     <Sequence DisplayName="エラー処理" sap:VirtualizedContainerService.HintSize="526,431" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -119,7 +107,7 @@
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:LogMessage DisplayName="メッセージをログ" sap:VirtualizedContainerService.HintSize="484,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[String.Format(&quot;https://platform.uipath.com/{0}/{1}/odata/Users: {2}&quot;,accountLogicalName,serviceInstanceName,responseModel)]">
+      <ui:LogMessage DisplayName="メッセージをログ" sap:VirtualizedContainerService.HintSize="484,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[String.Format(&quot;odata/Users: {0}&quot;,responseModel)]">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -127,7 +115,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:LogMessage>
-      <If Condition="[responseModel.Value.Count=0]" DisplayName="条件分岐" sap:VirtualizedContainerService.HintSize="484,208" sap2010:WorkflowViewState.IdRef="If_1">
+      <If Condition="[responseModel.Count=0]" DisplayName="条件分岐" sap:VirtualizedContainerService.HintSize="484,208" sap2010:WorkflowViewState.IdRef="If_1">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -141,10 +129,10 @@
     </Sequence>
     <Assign DisplayName="代入" sap:VirtualizedContainerService.HintSize="526,60" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
-        <OutArgument x:TypeArguments="u:UserDto">[userDto]</OutArgument>
+        <OutArgument x:TypeArguments="njl:JToken">[userDto]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="u:UserDto">[responseModel.value.ToArray()(0)]</InArgument>
+        <InArgument x:TypeArguments="njl:JToken">[responseModel.ToArray()(0)]</InArgument>
       </Assign.Value>
     </Assign>
   </Sequence>
